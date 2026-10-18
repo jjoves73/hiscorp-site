@@ -59,6 +59,13 @@ Modern, responsive web application for HISCORP inspection services across the Sa
 
 The following features are scheduled for upcoming releases:
 
+- [ ] **Go-live on the client's Google account (after client approval)**:
+  - Create a Google Cloud service account on the client's account and enable the Google Calendar API.
+  - Share the client's calendar with the service account (permission: *Make changes to events*).
+  - In Render, set `CALENDAR_MODE=google`, `GOOGLE_CALENDAR_ID` and `GOOGLE_SERVICE_ACCOUNT_JSON` (never commit these).
+  - Bookings then persist in the real calendar instead of the resettable mock calendar.
+  - Move off the Render free tier (no sleep) and connect the client's custom domain.
+
 - [ ] **Automated Email Confirmations & Notifications**:
   - **Client Confirmation Email**:
     - Triggered immediately upon completing Step 4 of the booking wizard.
