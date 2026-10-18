@@ -1,0 +1,21 @@
+# One-click deploy on Render (https://render.com): New + > Blueprint > pick this repo.
+# Serves the website AND the API from a single URL, so property lookup,
+# calendar slots and booking all work for the client preview.
+services:
+  - type: web
+    name: hiscorp-site
+    runtime: node
+    plan: free
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/config
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: CALENDAR_MODE
+        value: mock
+      - key: OSM_CONTACT
+        value: hiscorp@gmail.com
+      # Paste your RentCast key in the Render dashboard (never commit it).
+      - key: RENTCAST_API_KEY
+        sync: false
