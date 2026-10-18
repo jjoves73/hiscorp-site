@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HISCORP — Premier Property & Home Inspections | Bay Area</title>
+  <meta name="description" content="Thorough, certified property inspections for traditional homes, manufactured/mobile homes (Title 25), multi-unit complexes, and commercial properties across the Bay Area." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/hiscorp-logo.png" />
+  <link rel="stylesheet" href="/src/index.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+  <!-- Top Bar / Emergency & Direct line -->
+  <header class="site-header" id="navbar">
+    <div class="container nav-content">
+      <a href="#" class="brand-logo" aria-label="HISCORP Home">
+        <img src="/images/hiscorp-logo.png" alt="HISCORP" class="brand-logo-img" />
+        <div class="brand-text">
+          <span class="brand-name">HISCORP</span>
+          <span class="brand-sub">INSPECTION SERVICES</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#testimonials" class="nav-link">Reviews</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="/admin.html" class="nav-link" title="Calendar">Calendar</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="tel:4089661634" class="phone-link" aria-label="Call (408) 966-1634">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span class="phone-text">(408) 966-1634</span>
+        </a>
+        <a href="#booking-section" class="btn btn-gold btn-sm nav-cta-btn">Book Online</a>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenuDrawer">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer (Direct Body Child for Global Stacking Context) -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay" aria-hidden="true"></div>
+  <div class="mobile-menu-drawer" id="mobileMenuDrawer" aria-hidden="true">
+    <div class="mobile-menu-header">
+      <div class="brand-logo">
+        <img src="/images/hiscorp-logo.png" alt="HISCORP" class="brand-logo-img" />
+        <div class="brand-text">
+          <span class="brand-name">HISCORP</span>
+          <span class="brand-sub">INSPECTION SERVICES</span>
+        </div>
+      </div>
+      <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close navigation menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <nav class="mobile-nav-links">
+      <a href="#services" class="mobile-nav-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Services</span>
+      </a>
+      <a href="#about" class="mobile-nav-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>About HISCORP</span>
+      </a>
+      <a href="#testimonials" class="mobile-nav-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>Reviews & Ratings</span>
+      </a>
+      <a href="#contact" class="mobile-nav-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span>Contact Us</span>
+      </a>
+      <a href="/admin.html" class="mobile-nav-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Calendar</span>
+      </a>
+    </nav>
+
+    <div class="mobile-menu-footer">
+      <a href="tel:4089661634" class="mobile-call-card">
+        <div class="call-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div>
+          <span class="call-label">Direct Line (Bay Area)</span>
+          <span class="call-number">(408) 966-1634</span>
+        </div>
+      </a>
+      <a href="#booking-section" class="btn btn-gold btn-lg mobile-book-btn">Book Inspection Online</a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-bg-backdrop">
+      <img src="/images/bay-area-hero.jpg" alt="Bay Area home inspected by HISCORP" class="hero-bg-img" />
+      <div class="hero-gradient-overlay"></div>
+    </div>
+    <div class="container hero-container-layout">
+      <div class="hero-content-col">
+        <div class="hero-badge animate-fade-in">
+          <span class="pulse-dot"></span>
+          <span>Certified Bay Area Property Inspections</span>
+        </div>
+        <h1 class="hero-title animate-fade-in-up">
+          Confidence Starts with a <span class="gradient-gold-text">Trusted Inspection</span>
+        </h1>
+        <p class="hero-subtitle animate-fade-in-up delay-1">
+          Bringing precision, actionable transparency, and decades of structural expertise to every inspection. Traditional homes, mobile home Title 25, multi-family, and commercial properties throughout Silicon Valley and the Bay Area.
+        </p>
+
+        <div class="hero-cta-group animate-fade-in-up delay-2">
+          <a href="#booking-section" class="btn btn-gold btn-lg shadow-glow">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <span>Schedule Inspection</span>
+          </a>
+          <a href="#services" class="btn btn-glass btn-lg">Explore Services</a>
+        </div>
+
+        <!-- Trust Pillars -->
+        <div class="hero-stats-grid">
+          <div class="stat-card">
+            <div class="stat-num">100%</div>
+            <div class="stat-lbl">Clear Digital Reports</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">T25</div>
+            <div class="stat-lbl">Mobile Home Certified</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">24h</div>
+            <div class="stat-lbl">Turnaround Guarantee</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">Bay Area</div>
+            <div class="stat-lbl">Sunnyvale & Silicon Valley</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-floating-badge-wrap">
+        <div class="hero-float-badge">
+          <svg class="icon text-amber" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <div>
+            <strong>Top Rated in Bay Area</strong>
+            <p>5.0 ★ Client Satisfaction</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Scheduling App: Automated Calendar + Free Property Intelligence -->
+  <section class="booking-section" id="booking-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="pill-tag">Automated Scheduling Engine</div>
+        <h2 class="section-title">Book Your Inspection Online</h2>
+        <p class="section-desc">
+          Real-time calendar availability and instant public property intelligence. Address lookup automatically identifies your property type, estimated duration, and safety factors.
+        </p>
+      </div>
+
+      <!-- Multi-step Interactive Booking Box -->
+      <div class="booking-wizard card-glass" id="bookingApp">
+        <!-- Wizard Navigation / Progress Tracker -->
+        <div class="wizard-stepper">
+          <div class="step-indicator active" data-step="1">
+            <div class="step-circle">1</div>
+            <div class="step-label">Service</div>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step-indicator" data-step="2">
+            <div class="step-circle">2</div>
+            <div class="step-label">Property Info</div>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step-indicator" data-step="3">
+            <div class="step-circle">3</div>
+            <div class="step-label">Calendar Slot</div>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step-indicator" data-step="4">
+            <div class="step-circle">4</div>
+            <div class="step-label">Confirm</div>
+          </div>
+        </div>
+
+        <!-- Wizard Panes Container -->
+        <div class="wizard-body">
+          <!-- STEP 1: Select Service -->
+          <div class="wizard-pane active" id="pane-step-1">
+            <h3 class="pane-title">Choose Your Inspection Type</h3>
+            <p class="pane-subtitle">Select the service that best matches your property. Duration will calibrate to your exact building specs.</p>
+
+            <div class="services-selection-grid" id="serviceOptionsList">
+              <!-- Dynamically populated or enhanced -->
+              <div class="service-select-card selected" data-service-id="residential">
+                <div class="service-card-img-wrap">
+                  <img src="/images/residential.jpg" alt="Residential inspection" />
+                </div>
+                <div class="service-card-info">
+                  <div class="service-card-top">
+                    <h4>Residential Home Inspection</h4>
+                    <span class="service-badge">~3 Hours</span>
+                  </div>
+                  <p>Single-family homes, townhomes, and condos. Full roof-to-foundation structural & mechanical diagnostic.</p>
+                </div>
+                <div class="select-check">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+              </div>
+
+              <div class="service-select-card" data-service-id="mobile-t25">
+                <div class="service-card-img-wrap">
+                  <img src="/images/mobile-home.png" alt="Mobile home Title 25 inspection" />
+                </div>
+                <div class="service-card-info">
+                  <div class="service-card-top">
+                    <h4>Mobile Home Title 25 Inspection</h4>
+                    <span class="service-badge">~1.5 Hours</span>
+                  </div>
+                  <p>California Title 25 health & safety certified inspections for manufactured homes and community units.</p>
+                </div>
+                <div class="select-check">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+              </div>
+
+              <div class="service-select-card" data-service-id="multi-unit">
+                <div class="service-card-img-wrap">
+                  <img src="/images/multi-unit.png" alt="Multi-unit apartment inspection" />
+                </div>
+                <div class="service-card-info">
+                  <div class="service-card-top">
+                    <h4>Multi-Unit & Apartments</h4>
+                    <span class="service-badge">~2+ Hours</span>
+                  </div>
+                  <p>Duplexes, fourplexes, and apartment buildings. Comprehensive exterior, common facilities, and unit audits.</p>
+                </div>
+                <div class="select-check">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+              </div>
+
+              <div class="service-select-card" data-service-id="commercial">
+                <div class="service-card-img-wrap">
+                  <img src="/images/commercial.jpg" alt="Commercial property inspection" />
+                </div>
+                <div class="service-card-info">
+                  <div class="service-card-top">
+                    <h4>Commercial Property Inspection</h4>
+                    <span class="service-badge">~4 Hours</span>
+                  </div>
+                  <p>Offices, retail suites, light industrial, and mixed-use buildings. Detailed risk and mechanical assessments.</p>
+                </div>
+                <div class="select-check">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="wizard-actions">
+              <button type="button" class="btn btn-gold btn-lg" id="btnNext1">
+                <span>Continue to Property Lookup</span>
+                <svg class="icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 2: Address & Live Free Property Lookup -->
+          <div class="wizard-pane" id="pane-step-2">
+            <h3 class="pane-title">Property Address & Automatic Intelligence</h3>
+            <p class="pane-subtitle">Enter your street address. Our free public API integration instantly retrieves county, census tract, building attributes, and FEMA flood zone data to include in your inspection booking.</p>
+
+            <div class="address-lookup-wrapper">
+              <label for="addressInput" class="form-label">Property Address</label>
+              <div class="address-input-box">
+                <svg class="icon search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input 
+                  type="text" 
+                  id="addressInput" 
+                  name="address" 
+                  class="form-control" 
+                  placeholder="e.g. 1085 Tasman Dr, Sunnyvale, CA 94089" 
+                  autocomplete="street-address" 
+                  required 
+                />
+                <button type="button" class="btn btn-gold btn-sm" id="btnLookupAddress">
+                  <span class="btn-text">Lookup Property</span>
+                  <span class="spinner hidden"></span>
+                </button>
+              </div>
+
+              <!-- Quick test buttons for easy demo -->
+              <div class="quick-examples">
+                <span class="quick-lbl">Demo presets:</span>
+                <button type="button" class="btn-chip" data-addr="1085 Tasman Dr, Sunnyvale, CA 94089">Sunnyvale Office</button>
+                <button type="button" class="btn-chip" data-addr="1 Infinite Loop, Cupertino, CA 95014">Cupertino</button>
+                <button type="button" class="btn-chip" data-addr="500 El Camino Real, Santa Clara, CA 95053">Santa Clara</button>
+              </div>
+
+              <!-- Autocomplete suggestions dropdown -->
+              <div class="suggestions-list hidden" id="addressSuggestions"></div>
+            </div>
+
+            <!-- Property Intelligence Card (Dynamically shown once looked up) -->
+            <div class="property-intel-card hidden" id="propertyIntelCard">
+              <div class="intel-header">
+                <div class="intel-title-group">
+                  <div class="intel-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                  </div>
+                  <div>
+                    <h4 class="intel-address" id="intelVerifiedAddress">--</h4>
+                    <span class="intel-status" id="intelServiceStatus">Verified Property</span>
+                  </div>
+                </div>
+                <div class="duration-pill" id="intelDurationBadge">
+                  <span>Est. Time: </span><strong id="intelMinutesVal">3.0 hrs</strong>
+                </div>
+              </div>
+
+              <!-- Key Property Metrics Grid -->
+              <div class="intel-metrics-grid">
+                <div class="metric-item highlight-metric">
+                  <span class="metric-lbl">Square Footage</span>
+                  <span class="metric-val text-amber" id="metricSqft">-- sq ft</span>
+                  <span class="metric-sub" id="metricSqftSource">Public Assessor Record</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-lbl">County</span>
+                  <span class="metric-val" id="metricCounty">--</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-lbl">Census Tract</span>
+                  <span class="metric-val" id="metricTract">--</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-lbl">FEMA Flood Zone</span>
+                  <span class="metric-val" id="metricFlood">--</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-lbl">Distance from Sunnyvale</span>
+                  <span class="metric-val" id="metricDistance">--</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-lbl">Year Built</span>
+                  <span class="metric-val" id="metricYear">Estimated</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-lbl">Stories / Levels</span>
+                  <span class="metric-val" id="metricStories">1 - 2</span>
+                </div>
+              </div>
+
+              <!-- Inspector Pre-Flight Insights / Advisory Alerts -->
+              <div class="intel-insights" id="intelInsightsList">
+                <!-- Injected via JS -->
+              </div>
+
+              <!-- Editable Specs Form (In case client wants to refine details) -->
+              <div class="refine-details-box">
+                <span class="refine-title">Refine Details (Optional)</span>
+                <div class="refine-grid">
+                  <div class="form-group">
+                    <label for="detailSqft" class="form-label-sm">Approx. Sq Ft</label>
+                    <input type="number" id="detailSqft" class="form-control-sm" placeholder="e.g. 2100" />
+                  </div>
+                  <div class="form-group">
+                    <label for="detailBedrooms" class="form-label-sm">Beds</label>
+                    <input type="number" id="detailBedrooms" class="form-control-sm" placeholder="e.g. 3" />
+                  </div>
+                  <div class="form-group">
+                    <label for="detailBathrooms" class="form-label-sm">Baths</label>
+                    <input type="number" step="0.5" id="detailBathrooms" class="form-control-sm" placeholder="e.g. 2.5" />
+                  </div>
+                  <div class="form-group">
+                    <label for="detailAccess" class="form-label-sm">Access / Lockbox Notes</label>
+                    <input type="text" id="detailAccess" class="form-control-sm" placeholder="e.g. Lockbox on side gate code 4921" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wizard-actions">
+              <button type="button" class="btn btn-glass" id="btnBack2">Back</button>
+              <button type="button" class="btn btn-gold btn-lg" id="btnNext2" disabled>
+                <span>Select Date & Time</span>
+                <svg class="icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 3: Time Slot Picker -->
+          <div class="wizard-pane" id="pane-step-3">
+            <h3 class="pane-title">Choose Appointment Time</h3>
+            <p class="pane-subtitle">Live real-time availability. Bookable slots guarantee adequate inspector travel time and on-site duration.</p>
+
+            <div class="calendar-picker-layout">
+              <!-- Calendar Month & Day Grid -->
+              <div class="calendar-month-box">
+                <div class="cal-nav-bar">
+                  <button type="button" class="cal-nav-btn" id="calPrevMonth" aria-label="Previous month">&larr;</button>
+                  <h4 class="cal-month-title" id="calMonthTitle">October 2026</h4>
+                  <button type="button" class="cal-nav-btn" id="calNextMonth" aria-label="Next month">&rarr;</button>
+                </div>
+                <div class="cal-weekdays">
+                  <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                </div>
+                <div class="cal-days-grid" id="calDaysGrid">
+                  <!-- Injected via JS -->
+                </div>
+              </div>
+
+              <!-- Available Timeslots on selected day -->
+              <div class="calendar-slots-box">
+                <div class="slots-header">
+                  <h4 id="selectedDayLabel">Select a Date</h4>
+                  <span class="tz-indicator" id="tzIndicator">Pacific Time (PT)</span>
+                </div>
+
+                <div class="slots-container" id="slotsContainer">
+                  <div class="slots-placeholder">Select a day from the calendar to view available inspection times.</div>
+                </div>
+
+                <div class="selected-slot-banner hidden" id="selectedSlotBanner">
+                  <span>Selected Time: </span>
+                  <strong id="selectedSlotText">--</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="wizard-actions">
+              <button type="button" class="btn btn-glass" id="btnBack3">Back</button>
+              <button type="button" class="btn btn-gold btn-lg" id="btnNext3" disabled>
+                <span>Continue to Client Info</span>
+                <svg class="icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 4: Client Contact & Confirmation -->
+          <div class="wizard-pane" id="pane-step-4">
+            <h3 class="pane-title">Contact Information & Review</h3>
+            <p class="pane-subtitle">Enter your contact details. Once confirmed, your appointment is reserved immediately and a digital confirmation will be generated.</p>
+
+            <form id="bookingFinalForm" class="booking-form" novalidate>
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="clientName" class="form-label">Full Name *</label>
+                  <input type="text" id="clientName" name="name" class="form-control" placeholder="e.g. Jordan Joves" required autocomplete="name" />
+                </div>
+                <div class="form-group">
+                  <label for="clientEmail" class="form-label">Email Address (for Report & Invite) *</label>
+                  <input type="email" id="clientEmail" name="email" class="form-control" placeholder="e.g. client@example.com" required autocomplete="email" />
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="clientPhone" class="form-label">Phone Number *</label>
+                  <input type="tel" id="clientPhone" name="phone" class="form-control" placeholder="e.g. (408) 555-0199" required autocomplete="tel" />
+                </div>
+                <div class="form-group">
+                  <label for="clientRole" class="form-label">I am the...</label>
+                  <select id="clientRole" name="role" class="form-control">
+                    <option value="Homebuyer">Homebuyer</option>
+                    <option value="Homeowner / Seller">Homeowner / Seller</option>
+                    <option value="Real Estate Agent">Real Estate Agent</option>
+                    <option value="Property Manager">Property Manager</option>
+                    <option value="Commercial Investor">Commercial Investor</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="clientNotes" class="form-label">Special Requests or Focus Areas</label>
+                <textarea id="clientNotes" name="notes" rows="3" class="form-control" placeholder="e.g. Please pay special attention to the crawlspace drainage and water heater..."></textarea>
+              </div>
+
+              <!-- Honeypot -->
+              <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" />
+
+              <!-- Order Summary Card -->
+              <div class="order-summary-card">
+                <h4 class="summary-card-title">Booking Summary</h4>
+                <div class="summary-grid">
+                  <div class="summary-line">
+                    <span class="summary-k">Service:</span>
+                    <strong class="summary-v" id="summaryService">Residential Home Inspection</strong>
+                  </div>
+                  <div class="summary-line">
+                    <span class="summary-k">Address:</span>
+                    <strong class="summary-v" id="summaryAddress">--</strong>
+                  </div>
+                  <div class="summary-line">
+                    <span class="summary-k">Date & Time:</span>
+                    <strong class="summary-v text-amber" id="summaryDateTime">--</strong>
+                  </div>
+                  <div class="summary-line">
+                    <span class="summary-k">Estimated Duration:</span>
+                    <span class="summary-v" id="summaryDuration">3.0 Hours on site</span>
+                  </div>
+                  <div class="summary-line">
+                    <span class="summary-k">Status:</span>
+                    <span class="summary-v"><span class="badge-tag">Instant Reservation</span></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="wizard-actions">
+                <button type="button" class="btn btn-glass" id="btnBack4">Back</button>
+                <button type="submit" class="btn btn-gold btn-lg" id="btnSubmitBooking">
+                  <span class="btn-text">Confirm & Book Inspection</span>
+                  <span class="spinner hidden"></span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- SUCCESS STATE -->
+          <div class="wizard-pane" id="pane-success">
+            <div class="success-card text-center">
+              <div class="success-icon-wrap">
+                <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <h3 class="success-title">Inspection Successfully Scheduled!</h3>
+              <p class="success-subtitle">
+                Your appointment has been confirmed and reserved. A confirmation email and digital preparation checklist will arrive shortly.
+              </p>
+
+              <div class="booking-receipt" id="bookingReceipt">
+                <!-- Injected via JS -->
+              </div>
+
+              <div class="success-action-buttons">
+                <a href="#" id="btnAddToGCal" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-lg">
+                  <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                  <span>Add to Your Calendar</span>
+                </a>
+                <button type="button" class="btn btn-glass" id="btnBookAnother">Schedule Another Inspection</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Deep Dive Section -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="pill-tag">Comprehensive Coverage</div>
+        <h2 class="section-title">Inspection Services Built on Accuracy</h2>
+        <p class="section-desc">From single-family homes to manufactured communities and commercial retail complexes, our reports give you unvarnished clarity.</p>
+      </div>
+
+      <div class="services-cards-grid">
+        <!-- Service 1 -->
+        <div class="service-feature-card">
+          <div class="card-media">
+            <img src="/images/mobile-home.png" alt="Title 25 Mobile Home Inspection" />
+            <span class="media-tag">Specialized Certification</span>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Mobile Home Title 25 Health & Safety</h3>
+            <p class="card-body">
+              Manufactured and mobile homes have unique structural foundations, tie-downs, egress requirements, and chassis codes. We perform thorough California Title 25 compliance inspections giving buyers and sellers peace of mind.
+            </p>
+            <ul class="check-list">
+              <li>Piers, tie-downs & seismic restraint systems</li>
+              <li>Gas line testing & water heater ventilation</li>
+              <li>Electrical sub-panel grounding & compliance</li>
+            </ul>
+            <a href="#booking-section" class="card-link" data-select-svc="mobile-t25">Book Title 25 Inspection &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-feature-card">
+          <div class="card-media">
+            <img src="/images/residential.jpg" alt="Residential Home Inspection" />
+            <span class="media-tag">Most Popular</span>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Residential Home Inspection</h3>
+            <p class="card-body">
+              Complete evaluation of single-family residences, townhomes, and condominiums. Every accessible square foot is checked with high-resolution thermal imaging and mechanical testing.
+            </p>
+            <ul class="check-list">
+              <li>Roofing, flashings, chimneys & gutter drainage</li>
+              <li>HVAC conditioning, ductwork & air quality</li>
+              <li>Attic insulation, foundation crawlspaces & moisture</li>
+            </ul>
+            <a href="#booking-section" class="card-link" data-select-svc="residential">Book Residential Inspection &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-feature-card">
+          <div class="card-media">
+            <img src="/images/multi-unit.png" alt="Multi-Unit and Apartment Inspection" />
+            <span class="media-tag">Investment Protection</span>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Multi-Unit Buildings & Apartments</h3>
+            <p class="card-body">
+              Designed specifically for real estate investors and HOAs. We assess common systems, individual tenant spaces, fire separation assemblies, and capital expenditure needs.
+            </p>
+            <ul class="check-list">
+              <li>Balconies, stairways & SB 721/326 compliance</li>
+              <li>Main electrical services & shared plumbing stacks</li>
+              <li>Life-safety systems, fire doors & emergency exits</li>
+            </ul>
+            <a href="#booking-section" class="card-link" data-select-svc="multi-unit">Book Multi-Unit Inspection &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="service-feature-card">
+          <div class="card-media">
+            <img src="/images/commercial.jpg" alt="Commercial Property Inspection" />
+            <span class="media-tag">Commercial Grade</span>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Commercial Property Inspections</h3>
+            <p class="card-body">
+              Clear Property Condition Assessments (PCA) for offices, retail strip centers, mixed-use buildings, and warehouses across Silicon Valley and the greater Bay Area.
+            </p>
+            <ul class="check-list">
+              <li>Commercial flat roofs & parapet flashings</li>
+              <li>Rooftop HVAC units & 3-phase electrical switchgear</li>
+              <li>ADA accessibility, exterior site paving & parking</li>
+            </ul>
+            <a href="#booking-section" class="card-link" data-select-svc="commercial">Book Commercial Inspection &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About / Why HISCORP Section -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image-column">
+          <div class="about-img-frame">
+            <img src="/images/inspector.jpg" alt="HISCORP certified inspector examining electrical panel" class="about-main-img" />
+            <div class="about-experience-badge">
+              <span class="exp-number">20+</span>
+              <span class="exp-text">Years Building & Inspection Experience</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-text-column">
+          <div class="pill-tag">Why Choose HISCORP</div>
+          <h2 class="section-title">Committed to Quality & Customer Satisfaction</h2>
+          <p class="lead-text">
+            We take immense pride in delivering thorough, reliable inspections that eliminate surprise costs and empower sound real estate decisions.
+          </p>
+
+          <div class="features-list">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <div>
+                <h4>Full Coverage — Every System, No Shortcuts</h4>
+                <p>We crawl the crawlspaces, climb the roofs, and test every accessible outlet, valve, and fixture.</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+              </div>
+              <div>
+                <h4>Fast Turnaround & Rapid Scheduling</h4>
+                <p>Digital reports delivered within 24 hours of inspection completion, complete with color photography and priority summaries.</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+              </div>
+              <div>
+                <h4>Clear Reports Without Jargon</h4>
+                <p>Categorized by safety hazard, major defect, and routine maintenance so you know what needs immediate action.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-cta">
+            <a href="#booking-section" class="btn btn-gold btn-lg">Book an Inspection</a>
+            <a href="tel:4089661634" class="btn btn-glass btn-lg">Call (408) 966-1634</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inspection Process (4 Steps) -->
+  <section class="process-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="pill-tag">The Workflow</div>
+        <h2 class="section-title">How It Works in 4 Simple Steps</h2>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="process-num">01</div>
+          <h4>Schedule Online</h4>
+          <p>Choose your service, check property data with our instant lookup, and select an open inspection slot in minutes.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">02</div>
+          <h4>On-Site Diagnostic</h4>
+          <p>Our certified inspector conducts a multi-hour systematic investigation of all major structural, mechanical, and safety components.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">03</div>
+          <h4>Receive Clear Report</h4>
+          <p>Access your interactive, modern digital report with high-resolution imagery and repair itemization within 24 hours.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">04</div>
+          <h4>Follow Up & Consultation</h4>
+          <p>Have questions? We review findings with you or your agent to make sure you are 100% prepared for negotiation or purchase.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client Testimonials -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="pill-tag">Client Reviews</div>
+        <h2 class="section-title">What Our Clients Say</h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">
+            "We had our home inspected by HISCORP, and the results were amazing! The team was incredible, professional, detail-oriented, and completed the inspection on time! The property breakdown gave us so much leverage in our home purchase."
+          </p>
+          <div class="author-info">
+            <div class="author-name">Sophie Dines</div>
+            <div class="author-loc">San Jose, CA</div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">
+            "Needed a fast Title 25 inspection on a manufactured home before escrow closed. HISCORP was punctual, knowledgeable on California standards, and issued a crystal-clear report the same evening. Outstanding service!"
+          </p>
+          <div class="author-info">
+            <div class="author-name">Marcus Rodriguez</div>
+            <div class="author-loc">Sunnyvale, CA</div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">
+            "As a real estate agent in Silicon Valley, HISCORP is my top recommendation for buyers. Their scheduler syncs cleanly, and their pre-flight property notes highlight key hazards before we even arrive on-site."
+          </p>
+          <div class="author-info">
+            <div class="author-name">Elena Chen</div>
+            <div class="author-loc">Palo Alto, CA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Footer -->
+  <footer class="site-footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col brand-col">
+          <div class="brand-logo footer-logo">
+            <img src="/images/hiscorp-logo.png" alt="HISCORP" class="brand-logo-img footer-logo-img" />
+            <div class="brand-text">
+              <span class="brand-name">HISCORP</span>
+              <span class="brand-sub">INSPECTION SERVICES</span>
+            </div>
+          </div>
+          <p class="footer-bio">
+            Helping homeowners, buyers, and commercial property managers feel confident — one inspection at a time.
+          </p>
+          <div class="social-links">
+            <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+            <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Services</h4>
+          <ul class="footer-links">
+            <li><a href="#booking-section" data-select-svc="residential">Residential Inspection</a></li>
+            <li><a href="#booking-section" data-select-svc="mobile-t25">Mobile Home Title 25</a></li>
+            <li><a href="#booking-section" data-select-svc="multi-unit">Multi-Unit & Apartments</a></li>
+            <li><a href="#booking-section" data-select-svc="commercial">Commercial Buildings</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About HISCORP</a></li>
+            <li><a href="#booking-section">Schedule Online</a></li>
+            <li><a href="/admin.html">Calendar</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col contact-col">
+          <h4 class="footer-heading">Contact & Location</h4>
+          <div class="contact-card-item">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <div>
+              <strong>Headquarters</strong>
+              <p>1085 Tasman Dr.<br />Sunnyvale, CA 94089</p>
+            </div>
+          </div>
+          <div class="contact-card-item">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div>
+              <strong>Direct Phone</strong>
+              <p><a href="tel:4089661634">(408) 966-1634</a></p>
+            </div>
+          </div>
+          <div class="contact-card-item">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <div>
+              <strong>Direct Email</strong>
+              <p><a href="mailto:hiscorp@gmail.com">hiscorp@gmail.com</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 HISCORP Inspection Services. All rights reserved. Licensed & Insured.</p>
+        <p class="footer-note">Real-Time Scheduling & Integrated Geographic Property Intelligence.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
