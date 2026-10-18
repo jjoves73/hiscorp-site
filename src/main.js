@@ -104,12 +104,30 @@ function initNavigation() {
     });
   });
 
+  // Make step indicators interactive
+  $$('.step-indicator').forEach((ind) => {
+    ind.style.cursor = 'pointer';
+    ind.addEventListener('click', async () => {
+      const s = Number(ind.getAttribute('data-step'));
+      if (s === 3 && !state.property) {
+        const inputVal = $('#addressInput')?.value.trim();
+        await runPropertyLookup(inputVal || '1428 Elm St, Berkeley, CA 94702');
+      }
+      goToStep(s);
+      if (s === 3) fetchMonthAvailability(state.currentMonth);
+    });
+  });
+
   // Step 1 -> 2
   $('#btnNext1')?.addEventListener('click', () => goToStep(2));
 
   // Step 2 -> 3
   $('#btnBack2')?.addEventListener('click', () => goToStep(1));
-  $('#btnNext2')?.addEventListener('click', () => {
+  $('#btnNext2')?.addEventListener('click', async () => {
+    const inputVal = $('#addressInput')?.value.trim();
+    if (!state.property) {
+      await runPropertyLookup(inputVal || '1428 Elm St, Berkeley, CA 94702');
+    }
     goToStep(3);
     fetchMonthAvailability(state.currentMonth);
   });
@@ -204,10 +222,23 @@ function initAddressLookup() {
   const input = $('#addressInput');
   const suggestionsBox = $('#addressSuggestions');
 
+  const sampleAddresses = [
+    { label: '1428 Elm St, Berkeley, CA 94702' },
+    { label: '100 California St, San Francisco, CA 94111' },
+    { label: '450 Grand Ave, Oakland, CA 94610' },
+    { label: '782 Marina Blvd, San Francisco, CA 94123' },
+    { label: '2200 University Ave, Palo Alto, CA 94301' },
+    { label: '55 S Market St, San Jose, CA 95113' },
+    { label: '1250 Lincoln Ave, San Jose, CA 95125' },
+    { label: '350 Bay St, San Francisco, CA 94133' },
+    { label: '888 Howard St, San Francisco, CA 94103' },
+  ];
+
   // Quick Demo Buttons
   $$('.btn-chip').forEach((btn) => {
     btn.addEventListener('click', () => {
       input.value = btn.getAttribute('data-addr');
+      if ($('#btnNext2')) $('#btnNext2').disabled = false;
       runPropertyLookup(input.value);
     });
   });
@@ -216,19 +247,34 @@ function initAddressLookup() {
   input.addEventListener('input', () => {
     clearTimeout(autocompleteTimer);
     const q = input.value.trim();
-    if (q.length < 4) {
+    if (q.length > 2 && $('#btnNext2')) {
+      $('#btnNext2').disabled = false;
+    }
+    if (q.length < 2) {
       suggestionsBox.classList.add('hidden');
       return;
     }
     autocompleteTimer = setTimeout(async () => {
+      let suggestions = [];
       try {
         const res = await fetch(`/api/address/suggest?q=${encodeURIComponent(q)}`);
-        const data = await res.json();
-        renderSuggestions(data.suggestions || []);
-      } catch (err) {
-        suggestionsBox.classList.add('hidden');
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.suggestions && data.suggestions.length) {
+            suggestions = data.suggestions;
+          }
+        }
+      } catch (err) {}
+
+      if (!suggestions.length) {
+        const lower = q.toLowerCase();
+        suggestions = sampleAddresses.filter((a) => a.label.toLowerCase().includes(lower));
+        if (!suggestions.length && q.length > 2) {
+          suggestions = [{ label: `${q}, San Francisco Bay Area, CA` }];
+        }
       }
-    }, 280);
+      renderSuggestions(suggestions);
+    }, 200);
   });
 
   // Lookup button click
@@ -414,6 +460,9 @@ function initCalendar() {
     renderCalendarMonth();
     fetchMonthAvailability(state.currentMonth);
   });
+
+  // Pre-fetch calendar on load so dates are ready
+  fetchMonthAvailability(state.currentMonth);
 }
 
 async function fetchMonthAvailability(dateObj) {
@@ -453,9 +502,20 @@ async function fetchMonthAvailability(dateObj) {
   }
 
   state.availabilityCache[`${y}-${m}`] = slots;
+
+  // Auto-select first upcoming available date if not already selected
+  const todayStr = toISODate(new Date());
+  if (!state.selectedDate || !slots[state.selectedDate]) {
+    const sortedDates = Object.keys(slots).sort();
+    const nextAvailable = sortedDates.find((d) => d >= todayStr && slots[d] && slots[d].length > 0) || sortedDates[0];
+    if (nextAvailable) {
+      state.selectedDate = nextAvailable;
+    }
+  }
+
   renderCalendarMonth();
   if (state.selectedDate && slots[state.selectedDate]) {
-    renderSlots(slots[state.selectedDate]);
+    renderSlots(slots[state.selectedDate], state.selectedDate);
   }
 }
 
