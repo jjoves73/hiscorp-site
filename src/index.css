@@ -879,6 +879,66 @@ button, input, select, textarea {
   margin: 0 1rem;
 }
 
+/* Responsive Stepper (2 rows of 2 on mobile: 1 & 2, then 3 & 4) */
+@media (max-width: 680px) {
+  .wizard-stepper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem 0.75rem;
+    padding: 0.85rem 1rem;
+    background: var(--bg-subtle);
+  }
+
+  .step-connector {
+    display: none;
+  }
+
+  .step-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.6rem 0.75rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    opacity: 0.65;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .step-indicator.active {
+    opacity: 1;
+    background: #ffffff;
+    border-color: var(--gold-500);
+    box-shadow: 0 2px 8px rgba(217, 119, 6, 0.15);
+  }
+
+  .step-indicator.completed {
+    opacity: 0.9;
+    border-color: #cbd5e1;
+  }
+
+  .step-circle {
+    width: 1.7rem;
+    height: 1.7rem;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .step-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .wizard-body {
+    padding: 1.25rem 1rem;
+  }
+}
+
 /* Wizard Body */
 .wizard-body {
   padding: 2.25rem;
