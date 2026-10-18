@@ -17,6 +17,10 @@ const state = {
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
+// Backend base URL. Empty = same origin (local dev / full-stack host).
+// Set VITE_API_BASE at build time to point a static host (e.g. GitHub Pages) at a hosted backend.
+const API_BASE = (import.meta.env?.VITE_API_BASE || '').replace(/\/$/, '');
+
 // Initialize Application
 document.addEventListener('DOMContentLoaded', async () => {
   initNavigation();
@@ -32,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
    -------------------------------------------------------------------------- */
 async function loadConfig() {
   try {
-    const res = await fetch('/api/config');
+    const res = await fetch(`${API_BASE}/api/config`);
     if (!res.ok) return;
     const data = await res.json();
     state.services = data.services;
@@ -104,14 +108,20 @@ function initNavigation() {
     });
   });
 
-  // Make step indicators interactive
+  // Make step indicators interactive (can't skip ahead of the property lookup)
   $$('.step-indicator').forEach((ind) => {
     ind.style.cursor = 'pointer';
     ind.addEventListener('click', async () => {
       const s = Number(ind.getAttribute('data-step'));
-      if (s === 3 && !state.property) {
+      if (s >= 3 && !state.property) {
         const inputVal = $('#addressInput')?.value.trim();
-        await runPropertyLookup(inputVal || '1428 Elm St, Berkeley, CA 94702');
+        if (!inputVal) {
+          alert('Please enter the property address first.');
+          goToStep(2);
+          return;
+        }
+        const ok = await runPropertyLookup(inputVal);
+        if (!ok) { goToStep(2); return; }
       }
       goToStep(s);
       if (s === 3) fetchMonthAvailability(state.currentMonth);
@@ -125,8 +135,13 @@ function initNavigation() {
   $('#btnBack2')?.addEventListener('click', () => goToStep(1));
   $('#btnNext2')?.addEventListener('click', async () => {
     const inputVal = $('#addressInput')?.value.trim();
+    if (!inputVal) {
+      alert('Please enter the property address first.');
+      return;
+    }
     if (!state.property) {
-      await runPropertyLookup(inputVal || '1428 Elm St, Berkeley, CA 94702');
+      const ok = await runPropertyLookup(inputVal);
+      if (!ok) return;
     }
     goToStep(3);
     fetchMonthAvailability(state.currentMonth);
@@ -200,7 +215,7 @@ async function recomputeDuration() {
   const sqft = $('#detailSqft')?.value || state.property?.facts?.sqft || '';
   const units = state.property?.facts?.units || '';
   try {
-    const res = await fetch(`/api/duration?service=${state.selectedService}&sqft=${sqft}&units=${units}`);
+    const res = await fetch(`${API_BASE}/api/duration?service=${state.selectedService}&sqft=${sqft}&units=${units}`);
     if (res.ok) {
       const data = await res.json();
       state.durationMinutes = data.minutes;
@@ -222,59 +237,24 @@ function initAddressLookup() {
   const input = $('#addressInput');
   const suggestionsBox = $('#addressSuggestions');
 
-  const sampleAddresses = [
-    { label: '1428 Elm St, Berkeley, CA 94702' },
-    { label: '100 California St, San Francisco, CA 94111' },
-    { label: '450 Grand Ave, Oakland, CA 94610' },
-    { label: '782 Marina Blvd, San Francisco, CA 94123' },
-    { label: '2200 University Ave, Palo Alto, CA 94301' },
-    { label: '55 S Market St, San Jose, CA 95113' },
-    { label: '1250 Lincoln Ave, San Jose, CA 95125' },
-    { label: '350 Bay St, San Francisco, CA 94133' },
-    { label: '888 Howard St, San Francisco, CA 94103' },
-  ];
-
-  // Quick Demo Buttons
-  $$('.btn-chip').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      input.value = btn.getAttribute('data-addr');
-      if ($('#btnNext2')) $('#btnNext2').disabled = false;
-      runPropertyLookup(input.value);
-    });
-  });
-
   // Autocomplete typing with debounce
   input.addEventListener('input', () => {
     clearTimeout(autocompleteTimer);
+    state.property = null; // address edited: require a fresh lookup
     const q = input.value.trim();
-    if (q.length > 2 && $('#btnNext2')) {
-      $('#btnNext2').disabled = false;
-    }
-    if (q.length < 2) {
+    if (q.length < 4) {
       suggestionsBox.classList.add('hidden');
       return;
     }
     autocompleteTimer = setTimeout(async () => {
-      let suggestions = [];
       try {
-        const res = await fetch(`/api/address/suggest?q=${encodeURIComponent(q)}`);
-        if (res.ok) {
-          const data = await res.json();
-          if (data && data.suggestions && data.suggestions.length) {
-            suggestions = data.suggestions;
-          }
-        }
-      } catch (err) {}
-
-      if (!suggestions.length) {
-        const lower = q.toLowerCase();
-        suggestions = sampleAddresses.filter((a) => a.label.toLowerCase().includes(lower));
-        if (!suggestions.length && q.length > 2) {
-          suggestions = [{ label: `${q}, San Francisco Bay Area, CA` }];
-        }
+        const res = await fetch(`${API_BASE}/api/address/suggest?q=${encodeURIComponent(q)}`);
+        const data = res.ok ? await res.json() : { suggestions: [] };
+        renderSuggestions(data.suggestions || []);
+      } catch (err) {
+        suggestionsBox.classList.add('hidden');
       }
-      renderSuggestions(suggestions);
-    }, 200);
+    }, 280);
   });
 
   // Lookup button click
@@ -335,38 +315,22 @@ async function runPropertyLookup(address) {
     if (btnText) btnText.textContent = 'Analyzing...';
 
     let data = null;
+    let res;
     try {
-      const res = await fetch(`/api/property?address=${encodeURIComponent(address)}`);
-      if (res.ok) {
-        data = await res.json();
-      }
+      res = await fetch(`${API_BASE}/api/property?address=${encodeURIComponent(address)}`);
     } catch (e) {
-      console.warn('Backend unavailable, using client property mock:', e);
+      alert('Property lookup service is unavailable right now. Please try again shortly or call (408) 966-1634.');
+      return false;
     }
-
-    if (!data) {
-      // Mock property details for client preview
-      data = {
-        found: true,
-        address: address || '1428 Elm St, Berkeley, CA 94702',
-        facts: {
-          propertyType: 'Single Family Residential',
-          yearBuilt: 1988,
-          sqft: 2450,
-          bedrooms: 4,
-          bathrooms: 3,
-          stories: 2,
-        },
-        county: 'Alameda County',
-        distanceMiles: 8.4,
-        floodZone: { zone: 'X (Minimal Risk)' },
-        insights: [
-          { type: 'age', text: 'Built in 1988 — Electrical subpanel and copper/PEX plumbing check recommended.' },
-          { type: 'foundation', text: 'Raised foundation with crawlspace — moisture barrier and seismic strapping will be inspected.' },
-          { type: 'service', text: 'Ideal match for Full Comprehensive Residential Home Inspection.' }
-        ],
-        sources: ['California Public Records Mock Cache', 'Bay Area GIS']
-      };
+    try {
+      data = await res.json();
+    } catch (e) {
+      alert('Property lookup service returned an unexpected response. Please try again.');
+      return false;
+    }
+    if (!res.ok || !data?.found) {
+      alert(data?.error || "We couldn't verify that address. Please check the street number and city.");
+      return false;
     }
 
     state.property = data;
@@ -380,8 +344,10 @@ async function runPropertyLookup(address) {
     }
 
     nextBtn.disabled = false;
+    return true;
   } catch (err) {
-    alert('Please enter a valid street address.');
+    alert('Something went wrong looking up that address. Please try again.');
+    return false;
   } finally {
     if (btn) btn.disabled = false;
     spinner?.classList.add('hidden');
@@ -477,7 +443,7 @@ async function fetchMonthAvailability(dateObj) {
 
   let slots = null;
   try {
-    const res = await fetch(`/api/availability?from=${fromStr}&to=${toStr}&minutes=${minutes}`);
+    const res = await fetch(`${API_BASE}/api/availability?from=${fromStr}&to=${toStr}&minutes=${minutes}`);
     if (res.ok) {
       const data = await res.json();
       slots = data.slots;
@@ -684,7 +650,7 @@ function initBookingForm() {
 
       let data = null;
       try {
-        const res = await fetch('/api/bookings', {
+        const res = await fetch(`${API_BASE}/api/bookings`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),

@@ -243,18 +243,6 @@ function deriveSquareFootage({ records, osm, address, suggestedService }) {
     return { sqft: osm.totalSqft, source: 'Building Footprint Geometry', isEstimate: false };
   }
 
-  // Address-specific presets if user tests known properties
-  const lowerAddr = address.toLowerCase();
-  if (lowerAddr.includes('1085 tasman')) {
-    return { sqft: 1480, source: 'Community Unit Parcel Record', isEstimate: false };
-  }
-  if (lowerAddr.includes('infinite loop')) {
-    return { sqft: 850000, source: 'Campus Commercial Record', isEstimate: false };
-  }
-  if (lowerAddr.includes('el camino real')) {
-    return { sqft: 3450, source: 'Commercial Parcel Assessment', isEstimate: false };
-  }
-
   // Intelligent estimation based on property type / suggested service
   switch (suggestedService) {
     case 'mobile-t25':
